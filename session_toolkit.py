@@ -127,6 +127,15 @@ def read_image(content):
     return img
 
 def array_to_buffer(array):
+    """
+    array 형태의 이미지 데이터를 바이너리 형태로 변환.
+    
+    Args:
+    - array (numpy.ndarray): 이미지 데이터
+    
+    Returns:
+    - buffered (bytes): 이미지 데이터의 바이너리 형태
+    """
     image = Image.fromarray(array)
 
     # 이미지를 바이트 스트림으로 변환
