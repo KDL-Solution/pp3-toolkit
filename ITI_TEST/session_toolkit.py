@@ -18,6 +18,7 @@ def login_and_create_session(id="admin", pw="admin1234", base_url="https://api.p
     """
     url = os.path.join(base_url, endpoint)
     session = Session()
+    session.verify = False
     data = {
         "loginId": id,
         "password": pw,

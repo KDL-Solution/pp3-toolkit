@@ -21,15 +21,8 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-RESOURCE = os.getenv("RESOURCE")
-if RESOURCE is None:
-    raise ValueError("RESOURCE environment variable must be set.")
 
-RESOURCE_PORT = os.getenv("RESOURCE_PORT")
-if RESOURCE_PORT:
-    RESOURCE_API_URL = f"http://{RESOURCE}:{RESOURCE_PORT}"
-else:
-    RESOURCE_API_URL = f"https://{RESOURCE}"
+RESOURCE_SERVER_URL = os.getenv("RESOURCE_SERVER_URL")
 
 # custom metadata
 class MetaData(BaseModel):
@@ -78,7 +71,7 @@ def generate_image(request: ImageInput):
     
     buffer = array_to_buffer(temp_img)
     try:
-        res = upload_resource_public(session, "snoopy.jpg", buffer, mime_type="image/jpeg", base_url=RESOURCE_API_URL)
+        res = upload_resource_public(session, "snoopy.jpg", buffer, mime_type="image/jpeg", base_url=RESOURCE_SERVER_URL)
     except Exception as e:
         logger.error(f"Failed to upload image: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to upload image: {str(e)}")
