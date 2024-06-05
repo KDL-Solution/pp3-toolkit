@@ -16,7 +16,7 @@ def read_long_description():
         return "Long description could not be read from README.md"
     
 setuptools.setup(
-    name="pp3_toolkit", # 모듈 이름
+    name="pp3", # 모듈 이름
     version="0.0.1", # 버전
     packages = setuptools.find_packages(), # 모듈을 자동으로 찾아줌
     author="Kai", # 제작자
@@ -35,7 +35,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10'
     ],
-    package_data={'pp3_toolkit': ['LICENSE.txt', 'requirements.txt']},
+    package_data={'pp3': ['LICENSE.txt', 'requirements.txt']},
     include_package_data=True,
     python_requires=">=3.8"
 )

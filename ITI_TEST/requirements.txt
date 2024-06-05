@@ -1,6 +1,0 @@
-fastapi[all]
-requests
-requests-toolbelt
-numpy
-opencv-python
-pillow
