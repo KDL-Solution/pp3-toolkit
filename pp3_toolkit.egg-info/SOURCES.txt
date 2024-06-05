@@ -1,0 +1,8 @@
+LICENSE.txt
+README.md
+setup.py
+pp3_toolkit.egg-info/PKG-INFO
+pp3_toolkit.egg-info/SOURCES.txt
+pp3_toolkit.egg-info/dependency_links.txt
+pp3_toolkit.egg-info/requires.txt
+pp3_toolkit.egg-info/top_level.txt
