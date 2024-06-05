@@ -149,16 +149,35 @@ def array_to_buffer(array):
     return buffered.getvalue()
 
 if __name__ == "__main__":
-    session = login_and_create_session()
-    content = get_resource_content_public(session,  1)
-    img = read_image(content)
+    import argparse
+    import sys
+    args = argparse.ArgumentParser()
+    args.add_argument("--id", type=str, default="admin")
+    args.add_argument("--pw", type=str, default="admin1234")
+    args.add_argument("--login_url", type=str, default="https://api.polyground.info/")
+    args.add_argument("--resource_url", type=str, default="https://api.play.polyground.ai")
+    # session = login_and_create_session()
+    # content = get_resource_content_public(session,  1)
+    # img = read_image(content)
     
 
-    # 이미지 업로드 예시
-    # res = upload_resource_public(session,"1c0e6d73176a50e81f5d96c0de73547a.jpg", array_to_buffer(img), mime_type="image/jpeg")
-    # print(res.json())
-    # # 토큰 갱신
-    # reissue(session)
+    # # 이미지 업로드 예시
+    # # res = upload_resource_public(session,"1c0e6d73176a50e81f5d96c0de73547a.jpg", array_to_buffer(img), mime_type="image/jpeg")
+    # # print(res.json())
+    # # # 토큰 갱신
+    # # reissue(session)
     
-    img.save("result.jpg")
+    # img.save("result.jpg")
+    
+    for module_name in sorted(sys.modules.keys()):
+        print(module_name)
+
+        # 버전 정보가 있는 모듈만의 버전 출력
+    print("\nModule versions:")
+    import sys
+    for module_name, module in sys.modules.items():
+        version = getattr(module, '__version__', None)
+        if version is None:
+            continue
+        print(f"{module_name}: {version}")
     
