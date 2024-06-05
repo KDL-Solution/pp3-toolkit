@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: pp3
+Version: 0.1.1
+Summary: koreadep play-polyground api toolkit
+Home-page: https://github.com/KDL-Solution/PP3Toolkit
+Author: Kai
+Author-email: koreadeep19@gmail.com
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: requests==2.32.2
+Requires-Dist: pillow==10.3.0
+Requires-Dist: requests_toolbelt==1.0.0
+
+# PP3Toolkit
+https://play.polyground.ai/  모델 개발 툴킷

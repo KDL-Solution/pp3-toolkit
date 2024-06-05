@@ -17,7 +17,7 @@ def read_long_description():
 setuptools.setup(
     name="pp3", # 모듈 이름
     version="0.1.1", # 버전
-    packages = ['pp3'], # 패키지 디렉토리
+    packages = setuptools.find_packages(), # 패키지 폴더에 있는 모든 모듈을 자동으로 찾아준다.
     author="Kai", # 제작자
     author_email="koreadeep19@gmail.com", # contact
     description="koreadep play-polyground api toolkit", # 모듈 설명
