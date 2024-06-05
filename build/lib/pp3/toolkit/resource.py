@@ -1,7 +1,7 @@
 from requests import Session
 import os
 from requests_toolbelt import MultipartEncoder
-from pp3.toolkit.auth import token_reissue_decorator
+from toolkit.auth import token_reissue_decorator
 
 @token_reissue_decorator
 def download_public_resource(
@@ -25,7 +25,6 @@ def download_public_resource(
     resource_url = os.path.join(base_url, endpoint, str(resource_id))
     response = session.get(resource_url)
     response.raise_for_status()
-    
     return response.content
 
 @token_reissue_decorator
