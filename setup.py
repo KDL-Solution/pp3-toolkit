@@ -16,7 +16,7 @@ def read_long_description():
     
 setuptools.setup(
     name="pp3", # 모듈 이름
-    version='{{VERSION_PLACEHOLDER}}', # 버전
+    use_scm_version=True,
     packages = setuptools.find_packages(), # 패키지 폴더에 있는 모든 모듈을 자동으로 찾아준다.
     author="Kai", # 제작자
     author_email="koreadeep19@gmail.com", # contact
