@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 import random
 import traceback
-from session_toolkit import get_resource_content_public, upload_resource_public, login_and_create_session, read_image, array_to_buffer
+from pp3_toolkit.session_toolkit.session_toolkit import get_resource_content_public, upload_resource_public, login_and_create_session, read_image, array_to_buffer
 import cv2
 from typing import List, Dict
 import logging
