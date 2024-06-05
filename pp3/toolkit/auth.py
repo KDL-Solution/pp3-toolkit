@@ -82,7 +82,7 @@ def token_reissue_decorator(func):
         try:
             return func(*args, **kwargs)
         except exceptions.HTTPError as e:
-            if e.response.status_code == 401:
+            if e.response.status_code in [401, 403]:
                 update_session_token(session)
                 return func(*args, **kwargs)
             raise
