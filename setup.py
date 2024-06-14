@@ -3,7 +3,8 @@ import setuptools
 install_requires = [
     'requests==2.32.2',
     'pillow==10.3.0',
-    'requests_toolbelt==1.0.0'
+    'requests_toolbelt==1.0.0',
+    "setuptools_scm[toml]"
 ]
 
 # 안전하게 README 파일 읽기
