@@ -25,9 +25,9 @@ def read_image_from_binary(content, return_type="numpy"):
     else:
         raise ValueError("return_type은 'numpy' 또는 'PIL'이어야 합니다.")
 
-def convert_array_to_binary(array, format="JPEG"):
+def convert_image_to_binary(image, format="JPEG"):
     """
-    NumPy 배열 형태의 이미지 데이터를 format 형식으로 변환하여 바이너리로 반환합니다.
+    이미지 데이터를 format 형식으로 변환하여 바이너리로 반환합니다.
     
     Args:
     - array (numpy.ndarray): 이미지 데이터
@@ -35,9 +35,14 @@ def convert_array_to_binary(array, format="JPEG"):
     
     Returns:
     - binary (bytes): 이미지 데이터의 바이너리 형태
-    """
-    image = Image.fromarray(array.astype('uint8'), 'RGB')
-
+    """ 
+    if isinstance(image, np.ndarray):
+        image = Image.fromarray(image.astype('uint8'), 'RGB')
+    elif isinstance(image, Image.Image):
+        image = image.convert('RGB')
+    else:
+        raise ValueError("image는 numpy.ndarray 또는 PIL.Image.Image 타입이어야 합니다.")
+    
     # 이미지를 바이트 스트림으로 변환
     buffered = io.BytesIO()
     image.save(buffered, format=format)
