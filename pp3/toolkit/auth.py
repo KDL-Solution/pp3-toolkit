@@ -23,13 +23,17 @@ def login(
     - session (requests.Session): 인증 토큰과 쿠키가 포함된 세션 객체
     """
     login_url = os.path.join(base_url, endpoint)
-    session = Session()
-    session.verify = verify # SSL 인증서 검증 여부
+    
     login_payload = {
         "loginId": user_id,
         "password": password,
         "authType": auth_type
     }
+    
+    session = Session()
+    session.verify = verify # SSL 인증서 검증 여부
+    session.login_payload = login_payload
+    
     response = session.post(login_url, json=login_payload)
     
     response.raise_for_status() # 에러 발생시 예외 발생
@@ -65,7 +69,35 @@ def update_session_token(
     response.raise_for_status()
     new_token = response.json().get("token")
     session.headers.update({'Authorization': f'Bearer {new_token}'})
+    
+def update_session_token_relogin(
+    session: Session, 
+    base_url="https://api.polyground.info/", 
+    endpoint="v1/auth/login"
+    ) -> None:
+    """
+    현재 세션의 토큰을 재발급 받고, 인증 헤더를 업데이트합니다.
 
+    Args:
+    - session (requests.Session): 현재 유효한 세션 객체
+    - base_url (str): Auth API 서버의 기본 URL
+    - endpoint (str): 토큰 재발급 API의 엔드포인트
+
+    Returns:
+    - session (requests.Session): 업데이트된 세션 객체
+    """
+    login_url = os.path.join(base_url, endpoint)
+    response = session.post(login_url, json=session.login_payload)
+    
+    response.raise_for_status() # 에러 발생시 예외 발생
+    
+    token = response.json().get("token")
+    cookies = response.cookies
+    cookie_header = '; '.join([f"{key}={value}" for key, value in cookies.items()])
+
+    session.headers.update({'Authorization': f'Bearer {token}', 'Cookie': cookie_header})
+    print("Successfully re-logged in.")
+    
 def token_reissue_decorator(func):
     """
     토큰 만료(401 Unauthorized) 에러 발생 시 자동으로 토큰을 재발급 받고 함수를 재시도하는 데코레이터.
@@ -83,7 +115,9 @@ def token_reissue_decorator(func):
             return func(*args, **kwargs)
         except exceptions.HTTPError as e:
             if e.response.status_code in [401, 403]:
-                update_session_token(session)
+                #update_session_token(session)
+                # NOTE: 토큰 재발급 오류로 인해 로그인을 통해 새로운 세션을 생성하도록 수정함.
+                update_session_token_relogin(session)
                 return func(*args, **kwargs)
             raise
     return wrapper
