@@ -20,7 +20,7 @@ setuptools.setup(
     packages = setuptools.find_packages(), # 패키지 폴더에 있는 모든 모듈을 자동으로 찾아준다.
     author="Kai", # 제작자
     author_email="koreadeep19@gmail.com", # contact
-    description="koreadep play-polyground api toolkit", # 모듈 설명
+    description="koreadeep play-polyground api toolkit", # 모듈 설명
     long_description=read_long_description(), # README.md에 보통 모듈 설명을 해놓는다.
     long_description_content_type="text/markdown",
     url="https://github.com/KDL-Solution/PP3Toolkit",
